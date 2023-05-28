@@ -1,0 +1,16 @@
+<svg width="128.000000" height="128.000000" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<rect id="icon" width="128.000000" height="128.000000" fill="#202020"/>
+	<g clip-path="url(#clip2_1)">
+		<circle id="circle" cx="64.000000" cy="64.000000" r="32.000000" stroke="#FFFFFF" stroke-width="8.000000"/>
+		<rect id="rectangle" x="38.544159" y="83.798988" width="64.000000" height="8.000000" transform="rotate(-45 38.544159 83.798988)" fill="#FFFFFF"/>
+		<rect id="rectangle" x="44.200989" y="38.544159" width="64.000000" height="8.000000" transform="rotate(45 44.200989 38.544159)" fill="#FFFFFF"/>
+	</g>
+	<defs>
+		<clipPath id="clip2_1">
+			<rect id="icon" width="128.000000" height="128.000000" fill="white"/>
+		</clipPath>
+	</defs>
+</svg>
