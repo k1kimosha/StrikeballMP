@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxlvxqw4minve"]
+
+[ext_resource type="Script" path="res://scriptis/Main.gd" id="1_v8yaf"]
+[ext_resource type="PackedScene" uid="uid://dhkayrgntu8dh" path="res://world.tscn" id="2_7ct4m"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_v8yaf")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_7ct4m")]
+
+[node name="Players" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("../Players")

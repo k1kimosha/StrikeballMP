@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhkayrgntu8dh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_mpiou"]
+sky_top_color = Color(0.180392, 0.466667, 0.698039, 1)
+sky_horizon_color = Color(0.52549, 0.670588, 0.819608, 1)
+sun_angle_max = 45.0
+sun_curve = 0.0923359
+
+[sub_resource type="Sky" id="Sky_fpiml"]
+sky_material = SubResource("ProceduralSkyMaterial_mpiou")
+
+[sub_resource type="Environment" id="Environment_60is1"]
+background_mode = 2
+sky = SubResource("Sky_fpiml")
+
+[sub_resource type="BoxMesh" id="BoxMesh_1lx0h"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sgbv4"]
+size = Vector3(10, 0.1, 10)
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_60is1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_1lx0h")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_sgbv4")
