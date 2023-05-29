@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2mnt1kpa54k8"]
+
+[ext_resource type="Script" path="res://modules/network/Network.gd" id="1_yr5n4"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_o63uv"]
+properties/0/path = NodePath(".:sync_position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:sync_moution_velocity")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="Network" type="Node"]
+script = ExtResource("1_yr5n4")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_o63uv")

@@ -12,12 +12,15 @@ config_version=5
 
 config/name="StrikeballMP"
 run/main_scene="res://main.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.0", "Forward Plus")
-boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [autoload]
 
+Save="*res://modules/Save.gd"
+Signals="*res://modules/Signals.gd"
+Network="*res://modules/network/Network.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [editor_plugins]

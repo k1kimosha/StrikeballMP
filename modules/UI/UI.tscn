@@ -1,0 +1,121 @@
+[gd_scene load_steps=3 format=3 uid="uid://dn384sos8t6t0"]
+
+[ext_resource type="Script" path="res://modules/UI/AuthMenu.gd" id="1_xmtt6"]
+[ext_resource type="Script" path="res://modules/UI/MainMenu.gd" id="2_xpoqs"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.164706, 0.180392, 1)
+
+[node name="AuthMenu" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xmtt6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AuthMenu"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="AuthMenu/VBoxContainer"]
+layout_mode = 2
+text = "StrikeballMP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="GridContainer" parent="AuthMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="LoginLabel" type="Label" parent="AuthMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Login:"
+
+[node name="LoginTextBox" type="LineEdit" parent="AuthMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 20
+placeholder_text = "Enter login"
+alignment = 1
+
+[node name="PasswordLabel" type="Label" parent="AuthMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Password:"
+
+[node name="PasswordTextBox" type="LineEdit" parent="AuthMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 20
+placeholder_text = "Enter password"
+alignment = 1
+secret = true
+
+[node name="AuthButton" type="Button" parent="AuthMenu/VBoxContainer"]
+layout_mode = 2
+text = "Login"
+
+[node name="MainMenu" type="CenterContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_xpoqs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="AddressLabel" type="Label" parent="MainMenu/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "IP Address:"
+
+[node name="AddressTextBox" type="LineEdit" parent="MainMenu/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/minimum_character_width = 20
+
+[node name="PortLabel" type="Label" parent="MainMenu/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Port:"
+
+[node name="PortTextBox" type="LineEdit" parent="MainMenu/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="JoinButton" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[connection signal="text_changed" from="AuthMenu/VBoxContainer/HBoxContainer/LoginTextBox" to="AuthMenu" method="_on_login_text_box_text_changed"]
+[connection signal="text_changed" from="AuthMenu/VBoxContainer/HBoxContainer/PasswordTextBox" to="AuthMenu" method="_on_password_text_box_text_changed"]
+[connection signal="pressed" from="AuthMenu/VBoxContainer/AuthButton" to="AuthMenu" method="_on_auth_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/JoinButton" to="MainMenu" method="_on_join_button_pressed"]

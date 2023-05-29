@@ -1,17 +1,24 @@
 extends Node
 
-@onready var player = preload("res://player.tscn");
+@onready var player = preload("res://modules/player/player.tscn");
+@onready var world = preload("res://modules/world/world.tscn");
+@onready var UI = preload("res://modules/UI/UI.tscn");
 
-func _enter_tree():
+func _ready():
 	if "--server" in OS.get_cmdline_args():
 		start_server(true)
 	else:
-		start_server(false)
+		Save.ready.connect(load_ui)
+		Signals.join_button_pressed.connect(join_button_pressed)
 		discord_sdk.app_id = 1112393958920826900;
 		discord_sdk.details = "Тренирует стрельбу";
 		discord_sdk.large_image = "logo";
 		discord_sdk.start_timestamp = int(Time.get_unix_time_from_system());
 		discord_sdk.refresh();
+
+func load_ui():
+	var ui = UI.instantiate()
+	add_child(ui)
 
 func start_server(server: bool):
 	var peer = ENetMultiplayerPeer.new();
@@ -24,7 +31,8 @@ func start_server(server: bool):
 		peer.create_server(4242);
 		print("server started on 4242");
 	else:
-		peer.create_client("localhost", 4242);
+		peer.create_client(Save.save_data["address"], str(Save.save_data["port"]).to_int());
+		multiplayer.connected_to_server.connect(self.on_connect)
 	
 	multiplayer.multiplayer_peer = peer;
 
@@ -38,3 +46,11 @@ func peer_connected(id: int):
 func peer_disconected(id: int):
 	print(id, " has disconnected")
 	$Players.get_node(str(id)).queue_free()
+
+func on_connect():
+	get_node("UI").hide()
+
+func join_button_pressed():
+	var w = world.instantiate();
+	add_child(w);
+	start_server(false)
