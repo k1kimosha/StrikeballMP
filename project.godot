@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 
 Save="*res://modules/Save.gd"
 Signals="*res://modules/Signals.gd"
-Network="*res://modules/network/Network.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [editor_plugins]

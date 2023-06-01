@@ -9,10 +9,10 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func is_local_auth():
-	return Network.get_multiplayer_authority() == multiplayer.get_unique_id()
+	return $Network.get_multiplayer_authority() == multiplayer.get_unique_id()
 
 func _ready():
-	Network.set_multiplayer_authority(str(name).to_int());
+	$Network.set_multiplayer_authority(str(name).to_int());
 	
 	if !is_local_auth(): return
 	$Camera3D.current = is_local_auth();
@@ -31,10 +31,10 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	if !is_local_auth():
-		if not Network.processed_position:
-			position = Network.sync_position;
-			Network.processed_position = true;
-		velocity = Network.sync_moution_velocity;
+		if not $Network.processed_position:
+			position = $Network.sync_position;
+			$Network.processed_position = true;
+		velocity = $Network.sync_moution_velocity;
 		
 		move_and_slide()
 		return
@@ -70,5 +70,5 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	Network.sync_position = position
-	Network.sync_moution_velocity = velocity
+	$Network.sync_position = position
+	$Network.sync_moution_velocity = velocity

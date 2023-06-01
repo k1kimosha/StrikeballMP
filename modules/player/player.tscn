@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dova6wklsbgwb"]
+[gd_scene load_steps=5 format=3 uid="uid://dova6wklsbgwb"]
 
 [ext_resource type="Script" path="res://modules/player/Player.gd" id="1_5wxsu"]
+[ext_resource type="PackedScene" uid="uid://c2mnt1kpa54k8" path="res://modules/network/Network.tscn" id="2_ekus4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w71vy"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yrhcv"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_5wxsu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -20,3 +22,5 @@ mesh = SubResource("CapsuleMesh_yrhcv")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.2)
 fov = 90.0
+
+[node name="Network" parent="." instance=ExtResource("2_ekus4")]

@@ -23,6 +23,7 @@ size = Vector3(10, 0.1, 10)
 environment = SubResource("Environment_60is1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_mask = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_1lx0h")
