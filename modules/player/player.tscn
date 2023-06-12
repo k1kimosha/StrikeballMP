@@ -24,3 +24,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.2)
 fov = 90.0
 
 [node name="Network" parent="." instance=ExtResource("2_ekus4")]
+
+[node name="username" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.12551, 0)
+visibility_range_begin = 1.0
+billboard = 2
+text = "username"
+outline_size = 8

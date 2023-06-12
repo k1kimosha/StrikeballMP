@@ -1,14 +1,14 @@
 extends Node
 
 const USEROPTIONS = "user://user_options.save";
-const SAVEGAME = "user://save_game.save";
+const LASTCONNECTION = "user://last_connection.save";
 
 var userOptions_data = {}
-var save_data = {}
+var last_connection = {}
 
 func _ready():
 	userOptions_data = get_userOptions()
-	save_data = get_game()
+	last_connection = get_lConnection()
 	await get_tree().create_timer(1.0).timeout
 	ready.emit()
 
@@ -28,17 +28,20 @@ func save_userOptions():
 	save_userOptions.store_line(JSON.stringify(userOptions_data))
 	save_userOptions.close()
 
-func get_game():
-	if !FileAccess.file_exists(SAVEGAME):
-		save_data = {"address": "127.0.0.1", "port": 4242}
-		save_game()
-	var file = FileAccess.open(SAVEGAME, FileAccess.READ)
+func get_lConnection():
+	if !FileAccess.file_exists(LASTCONNECTION):
+		last_connection = {"address": "127.0.0.1", "port": 4242}
+		save_lConnection()
+	var file = FileAccess.open(LASTCONNECTION, FileAccess.READ)
 	var content = file.get_as_text()
 	var data = JSON.parse_string(content)
-	save_data = data
+	last_connection = data
 	return data
 
-func save_game():
-	var save_game = FileAccess.open(SAVEGAME, FileAccess.WRITE)
-	save_game.store_line(JSON.stringify(save_data))
-	save_game.close()
+func save_lConnection():
+	var save_connection = FileAccess.open(LASTCONNECTION, FileAccess.WRITE)
+	save_connection.store_line(JSON.stringify(last_connection))
+	save_connection.close()
+
+func gen_sha(str: String):
+	return str.sha256_text()
