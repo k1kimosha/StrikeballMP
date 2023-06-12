@@ -4,6 +4,8 @@ extends Node
 @onready var world = preload("res://modules/world/world.tscn");
 @onready var UI = preload("res://modules/UI/UI.tscn");
 
+var player_info = {};
+
 func _ready():
 	if "--server" in OS.get_cmdline_args():
 		start_server(true)
@@ -48,9 +50,11 @@ func peer_connected(id: int):
 	
 	p.name = str(id);
 	$Players.add_child(p);
+	rpc_id(id, "register_player", player_info)
 
 func peer_disconected(id: int):
 	print(id, " has disconnected")
+	player_info.erase(id)
 	$Players.get_node(str(id)).queue_free()
 
 func on_connect():
@@ -60,5 +64,23 @@ func on_connect():
 	discord_sdk.refresh();
 
 func on_connection_failed():
-	get_node("UI").get_node("MainMenu").show_unknow()
-	
+	get_node("UI").get_node("MainMenu").show_server_not_exist()
+
+@rpc("any_peer")
+func register_player(_player_info):
+	var id = multiplayer.get_remote_sender_id()
+	$Players.get_node(str(multiplayer.multiplayer_peer.get_unique_id())).get_node("username").text = Save.userOptions_data["User_name"];
+	for _player in _player_info:
+		$Players.get_node(str(_player)).get_node("username").text = _player_info[_player].username;
+		rpc_id(_player, "register_on_other_client", Save.userOptions_data["User_name"])
+	rpc_id(id, "register_on_server", Save.userOptions_data["User_name"]);
+
+@rpc("any_peer")
+func register_on_server(_username):
+	var id = multiplayer.get_remote_sender_id();
+	player_info[id] = {"username": _username};
+
+@rpc("any_peer")
+func register_on_other_client(_username):
+	var id = multiplayer.get_remote_sender_id();
+	$Players.get_node(str(id)).get_node("username").text = _username

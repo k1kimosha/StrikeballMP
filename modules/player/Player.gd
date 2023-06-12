@@ -13,7 +13,6 @@ func is_local_auth():
 func _ready():
 	$Network.set_multiplayer_authority(str(name).to_int());
 	
-	username.text = str(name)
 	if !is_local_auth(): return
 	$Camera3D.current = is_local_auth();
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

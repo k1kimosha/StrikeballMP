@@ -14,8 +14,14 @@ func _ready():
 
 func get_userOptions():
 	if !FileAccess.file_exists(USEROPTIONS):
-		userOptions_data = {"User_login": "", "User_password": ""}
+		userOptions_data = {
+			"User_login": "",
+			"User_password": "",
+			"User_name": "unknown",
+		}
+		
 		save_userOptions()
+	
 	var file = FileAccess.open(USEROPTIONS, FileAccess.READ)
 	var content = file.get_as_text()
 	var data = JSON.parse_string(content)
@@ -24,14 +30,19 @@ func get_userOptions():
 	return data
 
 func save_userOptions():
-	var save_userOptions = FileAccess.open(USEROPTIONS, FileAccess.WRITE)
-	save_userOptions.store_line(JSON.stringify(userOptions_data))
-	save_userOptions.close()
+	var _save_userOptions = FileAccess.open(USEROPTIONS, FileAccess.WRITE)
+	_save_userOptions.store_line(JSON.stringify(userOptions_data))
+	_save_userOptions.close()
 
 func get_lConnection():
 	if !FileAccess.file_exists(LASTCONNECTION):
-		last_connection = {"address": "127.0.0.1", "port": 4242}
+		last_connection = {
+			"address": "127.0.0.1",
+			"port": 4242
+		}
+		
 		save_lConnection()
+	
 	var file = FileAccess.open(LASTCONNECTION, FileAccess.READ)
 	var content = file.get_as_text()
 	var data = JSON.parse_string(content)
@@ -39,9 +50,9 @@ func get_lConnection():
 	return data
 
 func save_lConnection():
-	var save_connection = FileAccess.open(LASTCONNECTION, FileAccess.WRITE)
-	save_connection.store_line(JSON.stringify(last_connection))
-	save_connection.close()
+	var _save_lConnection = FileAccess.open(LASTCONNECTION, FileAccess.WRITE)
+	_save_lConnection.store_line(JSON.stringify(last_connection))
+	_save_lConnection.close()
 
-func gen_sha(str: String):
-	return str.sha256_text()
+func gen_sha(_str: String):
+	return _str.sha256_text()

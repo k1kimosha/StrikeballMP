@@ -115,7 +115,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Join"
 
-[node name="Unknow_server" type="ColorRect" parent="."]
+[node name="Server_not_exist" type="ColorRect" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -131,7 +131,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.294118)
 
-[node name="Label" type="Label" parent="Unknow_server"]
+[node name="Label" type="Label" parent="Server_not_exist"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,6 +147,41 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Unknow server"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="User_not_exist" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.725
+anchor_right = 0.5
+anchor_bottom = 0.725
+offset_left = -156.0
+offset_top = -28.8
+offset_right = 156.0
+offset_bottom = 29.2
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.294118)
+
+[node name="Label" type="Label" parent="User_not_exist"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.5
+offset_top = -24.0
+offset_right = 116.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "User doesn't exist!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
